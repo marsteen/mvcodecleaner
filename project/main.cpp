@@ -1,3 +1,16 @@
+//***************************************************************************
+//
+//
+// @PROJECT  :    mvcodecleaner
+// @VERSION  :    1.0
+// @FILENAME :    main.cpp
+// @DATE     :    28.07.2021
+//
+// @AUTHOR   :    Martin Steen
+// @EMAIL    :    martin.steen@ksti.de
+//
+//
+//***************************************************************************
 
 #include <fstream>
 #include <string>
@@ -52,6 +65,10 @@ static bool readLine(std::ifstream& fs, string& line)
 }
 
 
+//---------------------------------------------------------------------------
+//
+//
+//---------------------------------------------------------------------------
 
 static bool readFile(const std::string& filename, std::vector<std::string>& outVec, int& changed)
 {
@@ -95,6 +112,11 @@ static bool readFile(const std::string& filename, std::vector<std::string>& outV
     return r;
 }
 
+//---------------------------------------------------------------------------
+//
+//
+//---------------------------------------------------------------------------
+
 static bool writeFile(const std::string& filename, const std::vector<std::string>& outVec)
 {
     bool r = false;
@@ -112,6 +134,10 @@ static bool writeFile(const std::string& filename, const std::vector<std::string
     return r;
 }
 
+//---------------------------------------------------------------------------
+//
+//
+//---------------------------------------------------------------------------
 
 
 int main(int argc, char* argv[])
