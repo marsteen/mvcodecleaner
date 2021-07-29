@@ -51,6 +51,11 @@ static bool readLine(std::ifstream& fs, string& line)
             {
                 // Windows lineend (0D0A)
                 fs.get(ch);
+                if (ch != 0x0A)
+                {
+                    // Mac OS9 lineend
+                    line.push_back(ch);
+                }
                 EndLine = true;
             }
         }
