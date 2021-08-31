@@ -2,7 +2,7 @@
 //
 //
 // @PROJECT  :    mvcodecleaner
-// @VERSION  :    1.0
+// @VERSION  :    1.1
 // @FILENAME :    main.cpp
 // @DATE     :    28.07.2021
 //
@@ -68,6 +68,30 @@ static bool readLine(std::ifstream& fs, string& line)
 
     return (line.size() > 0) || (!fs.eof());
 }
+
+
+static bool filterStrings(std::vector<std::string>& inVec, std::vector<std::string>& outVec, int& changed)
+{
+    for (auto it = inVec.begin(); it != inVec.end(); ++it)
+    {
+        std::string outStr;
+        for (int i = 0; i < it->size(); i++)
+        {
+            if ((*it)[i] == '\t')
+            {
+                outStr += "    ";
+                changed++;
+            }
+            else
+            {
+                outStr += (*it)[i];
+            }
+        }
+        outVec.push_back(outStr);
+    }
+    return true;
+}
+
 
 
 //---------------------------------------------------------------------------
@@ -150,22 +174,26 @@ int main(int argc, char* argv[])
     if (argc == 2)
     {
         std::vector<std::string> outVec;
+        std::vector<std::string> filterVec;
         int changed = 0;
 
         if (readFile(argv[1], outVec, changed))
         {
             cout << "mvcodecleaner: readFile " << argv[1] << " ok" << endl;
             cout << "removed spaces:" << changed << endl;
+
+            filterStrings(outVec, filterVec, changed);
+
             if (changed > 0)
             {
-                writeFile(argv[1], outVec);
+                writeFile(argv[1], filterVec);
             }
         }
     }
     else
     {
         cout << "usage: mvcodecleaner <filename>" << endl;
-        cout << "version 1.0" << endl;
+        cout << "version 1.1" << endl;
     }
     
     return 0;
